@@ -51,7 +51,14 @@ def is_bitlink(url, token):
     return response.ok
 
 
-def main(url):
+def main():
+    load_dotenv()
+    parser = argparse.ArgumentParser(
+        description='This programm generate or check bitly links'
+    )
+    parser.add_argument('link', help='Link or bitly link')
+    args = parser.parse_args()
+    url = args.link
     token = os.getenv('TOKEN')
     if is_bitlink(url, token):
         print_value = get_click_count(url, token)
@@ -61,10 +68,4 @@ def main(url):
 
 
 if __name__ == '__main__':
-    load_dotenv()
-    parser = argparse.ArgumentParser(
-        description='This programm generate or check bitly links'
-    )
-    parser.add_argument('link', help='Link or bitly link')
-    args = parser.parse_args()
-    main(args.link)
+    main()
